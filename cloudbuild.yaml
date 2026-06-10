@@ -1,0 +1,28 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t',
+      'asia-south1-docker.pkg.dev/my-second-project-499015/second-app-repo/my-second-image:latest',
+      '.'
+    ]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      'asia-south1-docker.pkg.dev/my-second-project-499015/second-app-repo/my-second-image:latest'
+    ]
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - compute
+      - instance-groups
+      - managed
+      - rolling-action
+      - restart
+      - second-app-mig
+      - --zone=asia-south1-a
+
+options:
+  logging: CLOUD_LOGGING_ONLY
