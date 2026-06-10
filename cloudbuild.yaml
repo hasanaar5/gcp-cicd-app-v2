@@ -3,14 +3,14 @@ steps:
     args: [
       'build',
       '-t',
-      'asia-south1-docker.pkg.dev/my-second-project-499015/second-app-repo/my-second-image:latest',
+      'asia-south1-docker.pkg.dev/project-00e22bdf-cb5f-4e38-830/second-repo-v2/second-image-v2:latest',
       '.'
     ]
 
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push',
-      'asia-south1-docker.pkg.dev/my-second-project-499015/second-app-repo/my-second-image:latest'
+      'asia-south1-docker.pkg.dev/project-00e22bdf-cb5f-4e38-830/second-repo-v2/second-image-v2:latest'
     ]
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -21,7 +21,7 @@ steps:
       - managed
       - rolling-action
       - restart
-      - second-app-mig
+      - second-mig-v2
       - --zone=asia-south1-a
 
 options:
